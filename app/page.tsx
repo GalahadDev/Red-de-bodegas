@@ -89,10 +89,10 @@ export default function Home() {
         Nuestras Instalaciones
       </div>
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-900 mb-4">
-        <span className="italic">Conoce nuestras</span>
+        <span className="italic">Conoce nuestras dos</span>
         <br />
         <span className="bg-gradient-to-r from-blue-900 to-blue-700 bg-clip-text text-transparent">
-          dos bodegas
+          instalaciones estratégicamente ubicadas
         </span>
       </h2>
       <div className="w-24 h-1.5 bg-red-600 rounded-full mx-auto"></div>
@@ -415,47 +415,57 @@ export default function Home() {
     </div>
 
     {/* Estadísticas generales */}
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-16">
-      <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
-        <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-        <p className="text-2xl font-bold text-blue-900">+3</p>
-        <p className="text-sm text-gray-600">Años de experiencia</p>
-      </div>
-
-      <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
-        <div className="bg-red-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-          <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-        </div>
-        <p className="text-2xl font-bold text-blue-900">500+</p>
-        <p className="text-sm text-gray-600">Clientes satisfechos</p>
-      </div>
-
-      <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
-        <div className="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-          <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-          </svg>
-        </div>
-        <p className="text-2xl font-bold text-blue-900">2000+</p>
-        <p className="text-sm text-gray-600">m² disponibles</p>
-      </div>
-
-      <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
-        <div className="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-          <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-        <p className="text-2xl font-bold text-blue-900">24/7</p>
-        <p className="text-sm text-gray-600">Atención continua</p>
-      </div>
+<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto mt-16">
+  <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
+    <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
     </div>
+    <p className="text-2xl font-bold text-blue-900">+6</p>
+    <p className="text-sm text-gray-600">Años de experiencia</p>
+  </div>
+
+  <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
+    <div className="bg-red-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+      <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+    </div>
+    <p className="text-2xl font-bold text-blue-900">500+</p>
+    <p className="text-sm text-gray-600">Clientes satisfechos</p>
+  </div>
+
+  <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
+    <div className="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+      <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    </div>
+    <p className="text-2xl font-bold text-blue-900">6000+</p>
+    <p className="text-sm text-gray-600">m² disponibles</p>
+  </div>
+
+  <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
+    <div className="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+      <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </div>
+    <p className="text-2xl font-bold text-blue-900">24/7</p>
+    <p className="text-sm text-gray-600">Atención continua</p>
+  </div>
+
+  <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow col-span-2 md:col-span-1">
+    <div className="bg-orange-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+      <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z" />
+</svg>
+    </div>
+    <p className="text-2xl font-bold text-blue-900">24/7</p>
+    <p className="text-sm text-gray-600">Grúa horquilla disponible</p>
+  </div>
+</div>
   </div>
 </section>
 
@@ -485,7 +495,7 @@ export default function Home() {
                 
                 {/* Badge flotante */}
                 <div className="absolute -top-4 -right-4 bg-red-600 text-white px-6 py-3 rounded-full shadow-xl">
-                  <p className="text-sm font-bold">+3 años</p>
+                  <p className="text-sm font-bold">+6 años</p>
                   <p className="text-xs">de experiencia</p>
                 </div>
               </div>
@@ -497,7 +507,7 @@ export default function Home() {
                   <p className="text-xs text-gray-600">Seguridad</p>
                 </div>
                 <div className="text-center border-x border-gray-200">
-                  <p className="text-2xl font-bold text-blue-900">2000+</p>
+                  <p className="text-2xl font-bold text-blue-900">6000+</p>
                   <p className="text-xs text-gray-600">m² disponibles</p>
                 </div>
                 <div className="text-center">
@@ -530,7 +540,7 @@ export default function Home() {
               {/* Descripción */}
               <div className="space-y-4">
                 <p className="text-blue-100 text-base md:text-lg leading-relaxed">
-                  Red de Bodegas nació hace 3 años con una visión clara: <span className="text-white font-semibold">revolucionar el almacenamiento en Chile</span>. Desde entonces, nos hemos convertido en líderes del sector, ofreciendo soluciones personalizadas que se adaptan perfectamente a las necesidades de cada cliente.
+                  Red de Bodegas nació hace 6 años con una visión clara: <span className="text-white font-semibold">revolucionar el almacenamiento en Chile</span>. Desde entonces, nos hemos convertido en líderes del sector, ofreciendo soluciones personalizadas que se adaptan perfectamente a las necesidades de cada cliente.
                 </p>
                 
                 <p className="text-blue-100 text-base md:text-lg leading-relaxed">
@@ -852,7 +862,7 @@ export default function Home() {
               </div>
               <ul className="space-y-2 text-gray-700 text-sm ml-13 md:ml-16">
                 <li>• Solo pago por área de bodegaje utilizada</li>
-                <li>• De 5 m² hasta 2000 m²</li>
+                <li>• De 5 m² hasta 6000 m²</li>
                 <li>• Opción de retiro parcializado</li>
                 <li>• Despacho a domicilio</li>
                 <li>• Vigilancia 24x7 humana y electrónica</li>
@@ -1010,7 +1020,19 @@ export default function Home() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-white font-semibold">Transversal 5455 #230175 Cerrillos,</p>
+                    <p className="text-white font-semibold">Transversal 5455 Cerrillos,</p>
+                    <p className="text-white/80 text-sm">Región Metropolitana, Chile</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 group">
+                  <div className="bg-white/20 p-3 rounded-xl group-hover:bg-white/30 transition">
+                    <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold">Rivas 690 San Joaquín,</p>
                     <p className="text-white/80 text-sm">Región Metropolitana, Chile</p>
                   </div>
                 </div>
@@ -1023,8 +1045,8 @@ export default function Home() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-white font-semibold">Lunes a viernes: 07:00 a 19:00</p>
-                    <p className="text-white/80 text-sm">Sábado: 08:00 a 17:00 | Domingo: cerrado</p>
+                    <p className="text-white font-semibold">Lunes a viernes: 08:00 a 18:30</p>
+                    <p className="text-white/80 text-sm">Sábado: 09:00 a 16:00 | Domingo: cerrado</p>
                   </div>
                 </div>
               </div>
@@ -1105,7 +1127,7 @@ export default function Home() {
 
         {/* WhatsApp flotante mejorado */}
         <a 
-          href="https://wa.me/56934850678?text=Hola%20quiero%20más%20información"
+          href="https://wa.me/56934950478?text=Hola%20quiero%20más%20información"
           target="_blank" 
           rel="noopener noreferrer"
           className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 p-4 rounded-full shadow-2xl hover:shadow-green-500/50 transition-all duration-300 z-50 group animate-bounce hover:animate-none"
@@ -1223,6 +1245,7 @@ export default function Home() {
             <p className="text-blue-200 text-sm">Transversal 5455, 9230115</p>
             <p className="text-blue-200 text-sm">Cerrillos, Santiago</p>
           </div>
+          
           <div>
             <h4 className="font-semibold text-white mb-2 flex items-center gap-2">
               <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
@@ -1265,8 +1288,8 @@ export default function Home() {
             </svg>
             <div>
               <p className="text-blue-200 text-sm">Horario</p>
-              <p className="text-white text-sm">Lun - Vie: 07:00 - 19:00</p>
-              <p className="text-white text-sm">Sáb: 08:00 - 17:00</p>
+              <p className="text-white text-sm">Lun - Vie: 08:00 - 18:30</p>
+              <p className="text-white text-sm">Sáb: 09:00 - 16:00</p>
             </div>
           </li>
         </ul>
