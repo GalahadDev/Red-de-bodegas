@@ -1,13 +1,41 @@
-// app/page.tsx
+
+'use client';
+
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Home() {
+  const [scrollDirection, setScrollDirection] = useState('up');
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down
+        setScrollDirection('down');
+      } else {
+        // Scrolling up
+        setScrollDirection('up');
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   return (
     <div className="min-h-screen font-sans antialiased">
        
-      {/* Header: Logo y menú - Responsive */}
-      <header className="bg-white text-blue-900 py-3 md:py-4 fixed w-full z-20 shadow-md">
+      {/* Header: Logo y menú - Responsive con scroll hide */}
+      <header className={`bg-white text-blue-900 py-3 md:py-4 fixed w-full z-20 shadow-md transition-transform duration-300 ${
+        scrollDirection === 'down' ? '-translate-y-full md:translate-y-0' : 'translate-y-0'
+      }`}>
         <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-0">
           <a href="#inicio" className="cursor-pointer">
             <Image 
@@ -42,180 +70,394 @@ export default function Home() {
           <p className="text-base sm:text-lg md:text-xl mt-4 mb-6 px-4">
             Amplio espacio de almacenamiento y atención personalizada para satisfacer todas tus necesidades de almacenamiento.
           </p>
-          <button className="bg-red-600 text-white px-6 md:px-8 py-2 md:py-3 rounded-full hover:bg-red-700 transition text-sm md:text-base">
-            Pide tu presupuesto
-          </button>
+          <a href="#contacto" className="bg-red-600 text-white px-6 md:px-8 py-2 md:py-3 rounded-full hover:bg-red-700 transition text-sm md:text-base inline-block">
+  Pide tu presupuesto
+</a>
         </div>
       </section>
 
-       {/* Sección de Galería Rediseñada con Carrusel */}
-      <section className="bg-gradient-to-b from-white to-gray-50 py-12 md:py-20 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-red-100 rounded-full blur-3xl opacity-30"></div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-10 md:mb-16">
-            <div className="inline-flex items-center gap-2 bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
-              </svg>
-              El respaldo genuino proviene exclusivamente
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-900 mb-4">
-              <span className="italic">De profesionales</span>
-              <br />
-              <span className="bg-gradient-to-r from-blue-900 to-blue-700 bg-clip-text text-transparent">
-                con experiencia
-              </span>
-            </h2>
-            <div className="w-24 h-1.5 bg-red-600 rounded-full mx-auto"></div>
+       {/* Sección de Galería Rediseñada por Bodega */}
+<section className="bg-gradient-to-b from-white to-gray-50 py-12 md:py-20 relative overflow-hidden">
+  <div className="absolute top-0 right-0 w-96 h-96 bg-red-100 rounded-full blur-3xl opacity-30"></div>
+  
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="text-center mb-10 md:mb-16">
+      <div className="inline-flex items-center gap-2 bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+        </svg>
+        Nuestras Instalaciones
+      </div>
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-900 mb-4">
+        <span className="italic">Conoce nuestras</span>
+        <br />
+        <span className="bg-gradient-to-r from-blue-900 to-blue-700 bg-clip-text text-transparent">
+          dos bodegas
+        </span>
+      </h2>
+      <div className="w-24 h-1.5 bg-red-600 rounded-full mx-auto"></div>
+    </div>
+
+    {/* Bodega 1: Cerrillos */}
+    <div className="mb-16 md:mb-24">
+      <div className="flex items-center justify-center gap-3 mb-8">
+        <div className="h-px w-12 bg-gradient-to-r from-transparent to-blue-600"></div>
+        <div className="bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg">
+          <div className="flex items-center gap-2">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+            </svg>
+            <h3 className="text-xl md:text-2xl font-bold">Bodega Cerrillos</h3>
           </div>
+        </div>
+        <div className="h-px w-12 bg-gradient-to-l from-transparent to-blue-600"></div>
+      </div>
 
-          <div className="relative max-w-6xl mx-auto">
-            <div className="overflow-x-auto pb-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-              <div className="flex gap-6 md:gap-8">
-                <div className="flex-shrink-0 w-64 md:w-80 group">
-                  <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
-                    <Image 
-                      src="/images/camion.jpg" 
-                      alt="Camion de Carga" 
-                      width={320} 
-                      height={240} 
-                      className="w-full h-56 md:h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-5 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <h3 className="text-white font-bold text-lg mb-1">Transporte Seguro</h3>
-                      <p className="text-blue-100 text-sm">Flota moderna y confiable</p>
-                    </div>
-                  </div>
-                </div>
+      <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+        Transversal 5455, 9230115 Cerrillos - Instalaciones modernas con amplio espacio
+      </p>
 
-                <div className="flex-shrink-0 w-64 md:w-80 group">
-                  <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
-                    <Image 
-                      src="/images/carga.jpg" 
-                      alt="Camion Cargado" 
-                      width={320} 
-                      height={240} 
-                      className="w-full h-56 md:h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-5 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <h3 className="text-white font-bold text-lg mb-1">Carga Especializada</h3>
-                      <p className="text-blue-100 text-sm">Manejo profesional de mercancías</p>
-                    </div>
+      <div className="relative max-w-6xl mx-auto group/container">
+        <div className="overflow-x-scroll pb-8 scroll-smooth [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-gray-200 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-blue-600 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-blue-700">
+          <div className="flex gap-6 md:gap-8 w-max">
+            <div className="flex-shrink-0 w-72 md:w-96 group">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Image 
+                  src="/images/camion.jpg" 
+                  alt="Transporte Cerrillos" 
+                  width={384} 
+                  height={256} 
+                  className="w-full h-64 md:h-72 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2">
+                    Cerrillos
                   </div>
-                </div>
-
-                <div className="flex-shrink-0 w-64 md:w-80 group">
-                  <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
-                    <Image 
-                      src="/images/grua.jpg" 
-                      alt="Grua" 
-                      width={320} 
-                      height={240} 
-                      className="w-full h-56 md:h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-red-900/80 via-red-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-5 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <h3 className="text-white font-bold text-lg mb-1">Equipo Pesado</h3>
-                      <p className="text-red-100 text-sm">Maquinaria de última generación</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex-shrink-0 w-64 md:w-80 group">
-                  <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
-                    <Image 
-                      src="/images/oficinas.jpg" 
-                      alt="Oficinas de Atencion" 
-                      width={320} 
-                      height={240} 
-                      className="w-full h-56 md:h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-green-900/80 via-green-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-5 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <h3 className="text-white font-bold text-lg mb-1">Atención Personalizada</h3>
-                      <p className="text-green-100 text-sm">Servicio al cliente de excelencia</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex-shrink-0 w-64 md:w-80 group">
-                  <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
-                    <Image 
-                      src="/images/camion.jpg" 
-                      alt="Camion de Carga" 
-                      width={320} 
-                      height={240} 
-                      className="w-full h-56 md:h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-5 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <h3 className="text-white font-bold text-lg mb-1">Transporte Seguro</h3>
-                      <p className="text-blue-100 text-sm">Flota moderna y confiable</p>
-                    </div>
-                  </div>
+                  <h4 className="text-white font-bold text-xl mb-2">Transporte Seguro</h4>
+                  <p className="text-blue-100 text-sm">Flota moderna y confiable</p>
                 </div>
               </div>
             </div>
 
-            <div className="text-center mt-6">
-              <p className="text-gray-500 text-sm flex items-center justify-center gap-2">
-                <svg className="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-                </svg>
-                Desliza para ver más
-                <svg className="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-12">
-            <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+            <div className="flex-shrink-0 w-72 md:w-96 group">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Image 
+                  src="/images/carga.jpg" 
+                  alt="Carga Cerrillos" 
+                  width={384} 
+                  height={256} 
+                  className="w-full h-64 md:h-72 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2">
+                    Cerrillos
+                  </div>
+                  <h4 className="text-white font-bold text-xl mb-2">Carga Especializada</h4>
+                  <p className="text-blue-100 text-sm">Manejo profesional de mercancías</p>
+                </div>
               </div>
-              <p className="text-2xl font-bold text-blue-900">+3</p>
-              <p className="text-sm text-gray-600">Años de experiencia</p>
             </div>
 
-            <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <div className="bg-red-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
+            <div className="flex-shrink-0 w-72 md:w-96 group">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Image 
+                  src="/images/grua.jpg" 
+                  alt="Equipo Cerrillos" 
+                  width={384} 
+                  height={256} 
+                  className="w-full h-64 md:h-72 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2">
+                    Cerrillos
+                  </div>
+                  <h4 className="text-white font-bold text-xl mb-2">Equipo Pesado</h4>
+                  <p className="text-blue-100 text-sm">Maquinaria de última generación</p>
+                </div>
               </div>
-              <p className="text-2xl font-bold text-blue-900">500+</p>
-              <p className="text-sm text-gray-600">Clientes satisfechos</p>
             </div>
 
-            <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <div className="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
+            <div className="flex-shrink-0 w-72 md:w-96 group">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Image 
+                  src="/images/camion.jpg" 
+                  alt="Bodegaje Cerrillos" 
+                  width={384} 
+                  height={256} 
+                  className="w-full h-64 md:h-72 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2">
+                    Cerrillos
+                  </div>
+                  <h4 className="text-white font-bold text-xl mb-2">Gestión de Inventario</h4>
+                  <p className="text-blue-100 text-sm">Control total de tu mercancía</p>
+                </div>
               </div>
-              <p className="text-2xl font-bold text-blue-900">2000+</p>
-              <p className="text-sm text-gray-600">m² disponibles</p>
             </div>
 
-            <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
-              <div className="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
-                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+            <div className="flex-shrink-0 w-72 md:w-96 group">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Image 
+                  src="/images/carga.jpg" 
+                  alt="Zona de Carga Cerrillos" 
+                  width={384} 
+                  height={256} 
+                  className="w-full h-64 md:h-72 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2">
+                    Cerrillos
+                  </div>
+                  <h4 className="text-white font-bold text-xl mb-2">Zona de Descarga</h4>
+                  <p className="text-blue-100 text-sm">Acceso directo para vehículos</p>
+                </div>
               </div>
-              <p className="text-2xl font-bold text-blue-900">24/7</p>
-              <p className="text-sm text-gray-600">Atención continua</p>
+            </div>
+
+            <div className="flex-shrink-0 w-72 md:w-96 group">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Image 
+                  src="/images/grua.jpg" 
+                  alt="Montacargas Cerrillos" 
+                  width={384} 
+                  height={256} 
+                  className="w-full h-64 md:h-72 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2">
+                    Cerrillos
+                  </div>
+                  <h4 className="text-white font-bold text-xl mb-2">Equipos de Elevación</h4>
+                  <p className="text-blue-100 text-sm">Montacargas disponibles</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+
+        <div className="text-center mt-4">
+          <p className="text-gray-500 text-sm flex items-center justify-center gap-2">
+            <svg className="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+            </svg>
+            Desliza para ver más de Cerrillos
+            <svg className="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Bodega 2: San Joaquín */}
+    <div className="mb-12">
+      <div className="flex items-center justify-center gap-3 mb-8">
+        <div className="h-px w-12 bg-gradient-to-r from-transparent to-red-600"></div>
+        <div className="bg-red-600 text-white px-6 py-3 rounded-full shadow-lg">
+          <div className="flex items-center gap-2">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+            </svg>
+            <h3 className="text-xl md:text-2xl font-bold">Bodega San Joaquín</h3>
+          </div>
+        </div>
+        <div className="h-px w-12 bg-gradient-to-l from-transparent to-red-600"></div>
+      </div>
+
+      <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+        Rivas 690, San Joaquín - Atención personalizada y ubicación estratégica
+      </p>
+
+      <div className="relative max-w-6xl mx-auto group/container">
+        <div className="overflow-x-scroll pb-8 scroll-smooth [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-gray-200 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:bg-red-600 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:hover:bg-red-700">
+          <div className="flex gap-6 md:gap-8 w-max">
+            <div className="flex-shrink-0 w-72 md:w-96 group">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Image 
+                  src="/images/front-2.jpg" 
+                  alt="Oficinas San Joaquín" 
+                  width={384} 
+                  height={256} 
+                  className="w-full h-64 md:h-72 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-red-900/90 via-red-900/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2">
+                    San Joaquín
+                  </div>
+                  <h4 className="text-white font-bold text-xl mb-2">Atención Personalizada</h4>
+                  <p className="text-red-100 text-sm">Servicio al cliente de excelencia</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-shrink-0 w-72 md:w-96 group">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Image 
+                  src="/images/camion-2.jpg" 
+                  alt="Logística San Joaquín" 
+                  width={384} 
+                  height={256} 
+                  className="w-full h-64 md:h-72 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-red-900/90 via-red-900/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2">
+                    San Joaquín
+                  </div>
+                  <h4 className="text-white font-bold text-xl mb-2">Logística Eficiente</h4>
+                  <p className="text-red-100 text-sm">Distribución y almacenamiento</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-shrink-0 w-72 md:w-96 group">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Image 
+                  src="/images/descarga-2.jpg" 
+                  alt="Almacenamiento San Joaquín" 
+                  width={384} 
+                  height={256} 
+                  className="w-full h-64 md:h-72 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-red-900/90 via-red-900/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2">
+                    San Joaquín
+                  </div>
+                  <h4 className="text-white font-bold text-xl mb-2">Espacios Flexibles</h4>
+                  <p className="text-red-100 text-sm">Adaptados a tus necesidades</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-shrink-0 w-72 md:w-96 group">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Image 
+                  src="/images/front-camion-2.jpg" 
+                  alt="Recepción San Joaquín" 
+                  width={384} 
+                  height={256} 
+                  className="w-full h-64 md:h-72 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-red-900/90 via-red-900/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2">
+                    San Joaquín
+                  </div>
+                  <h4 className="text-white font-bold text-xl mb-2">Área de Recepción</h4>
+                  <p className="text-red-100 text-sm">Acceso controlado 24/7</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-shrink-0 w-72 md:w-96 group">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Image 
+                  src="/images/montacarga-2.jpg" 
+                  alt="Despacho San Joaquín" 
+                  width={384} 
+                  height={256} 
+                  className="w-full h-64 md:h-72 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-red-900/90 via-red-900/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2">
+                    San Joaquín
+                  </div>
+                  <h4 className="text-white font-bold text-xl mb-2">Centro de Despacho</h4>
+                  <p className="text-red-100 text-sm">Entregas rápidas y puntuales</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-shrink-0 w-72 md:w-96 group">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+                <Image 
+                  src="/images/panoramica-2.jpg" 
+                  alt="Paletizado San Joaquín" 
+                  width={384} 
+                  height={256} 
+                  className="w-full h-64 md:h-72 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-red-900/90 via-red-900/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold inline-block mb-2">
+                    San Joaquín
+                  </div>
+                  <h4 className="text-white font-bold text-xl mb-2">Área de Paletizado</h4>
+                  <p className="text-red-100 text-sm">Organización optimizada</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center mt-4">
+          <p className="text-gray-500 text-sm flex items-center justify-center gap-2">
+            <svg className="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+            </svg>
+            Desliza para ver más de San Joaquín
+            <svg className="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Estadísticas generales */}
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-16">
+      <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
+        <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+          <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <p className="text-2xl font-bold text-blue-900">+3</p>
+        <p className="text-sm text-gray-600">Años de experiencia</p>
+      </div>
+
+      <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
+        <div className="bg-red-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+          <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        </div>
+        <p className="text-2xl font-bold text-blue-900">500+</p>
+        <p className="text-sm text-gray-600">Clientes satisfechos</p>
+      </div>
+
+      <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
+        <div className="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+          <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+        </div>
+        <p className="text-2xl font-bold text-blue-900">2000+</p>
+        <p className="text-sm text-gray-600">m² disponibles</p>
+      </div>
+
+      <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
+        <div className="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+          <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <p className="text-2xl font-bold text-blue-900">24/7</p>
+        <p className="text-sm text-gray-600">Atención continua</p>
+      </div>
+    </div>
+  </div>
+</section>
 
      {/* Sección Azul Rediseñada: Imagen y texto - Responsive */}
       <section id="nosotros" className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 text-white py-12 md:py-20 relative overflow-hidden">
@@ -234,7 +476,7 @@ export default function Home() {
               {/* Imagen principal */}
               <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-2 shadow-2xl">
                 <Image 
-                  src="/images/seguridad.jpg"
+                  src="/images/montacarga-2.jpg"
                   alt="Nuestra Experiencia" 
                   width={600} 
                   height={450} 
@@ -515,7 +757,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             
             {/* Mapa 1: Cerrillos */}
-            <div className="relative group">
+            <div id="cerrillos" className="relative group">
               {/* Efecto de sombra y borde */}
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-red-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
               
@@ -542,7 +784,7 @@ export default function Home() {
             </div>
 
             {/* Mapa 2: San Joaquín */}
-            <div className="relative group">
+            <div id="san-joaquin" className="relative group">
               {/* Efecto de sombra y borde */}
               <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
               
@@ -875,6 +1117,177 @@ export default function Home() {
           <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">!</span>
         </a>
       </section>
+{/* Footer */}
+<footer className="bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 text-white relative overflow-hidden">
+  {/* Elementos decorativos */}
+  <div className="absolute top-0 left-0 w-96 h-96 bg-red-600/10 rounded-full blur-3xl"></div>
+  <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
+
+  <div className="container mx-auto px-4 relative z-10">
+    {/* Sección principal del footer */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-12 md:py-16">
+      
+      {/* Columna 1: Logo y descripción */}
+      <div className="lg:col-span-1">
+        <Image 
+          src="/images/logo.png" 
+          alt="REDdeBODEGAS" 
+          width={180}
+          height={50}
+          className="mb-4 brightness-0 invert"
+        />
+        <p className="text-blue-200 text-sm leading-relaxed mb-4">
+          Soluciones integrales de almacenamiento con más de 3 años de experiencia. Seguridad, confiabilidad y servicio personalizado.
+        </p>
+        <div className="flex gap-3">
+          <a href="https://wa.me/56934850678" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-green-600 p-2.5 rounded-full transition-all duration-300">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+          </a>
+          <a href="mailto:contacto@reddebodegas.cl" className="bg-white/10 hover:bg-red-600 p-2.5 rounded-full transition-all duration-300">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      {/* Columna 2: Enlaces rápidos */}
+      <div>
+        <h3 className="text-xl font-bold mb-4 text-white">Enlaces Rápidos</h3>
+        <ul className="space-y-2">
+          <li>
+            <a href="#inicio" className="text-blue-200 hover:text-white transition-colors flex items-center gap-2 group">
+              <svg className="w-4 h-4 text-red-600 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+              Inicio
+            </a>
+          </li>
+          <li>
+            <a href="#nosotros" className="text-blue-200 hover:text-white transition-colors flex items-center gap-2 group">
+              <svg className="w-4 h-4 text-red-600 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+              Nosotros
+            </a>
+          </li>
+          <li>
+            <a href="#servicios" className="text-blue-200 hover:text-white transition-colors flex items-center gap-2 group">
+              <svg className="w-4 h-4 text-red-600 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+              Servicios
+            </a>
+          </li>
+          <li>
+            <a href="#caracteristicas" className="text-blue-200 hover:text-white transition-colors flex items-center gap-2 group">
+              <svg className="w-4 h-4 text-red-600 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+              Características
+            </a>
+          </li>
+          <li>
+            <a href="#sucursales" className="text-blue-200 hover:text-white transition-colors flex items-center gap-2 group">
+              <svg className="w-4 h-4 text-red-600 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+              Sucursales
+            </a>
+          </li>
+          <li>
+            <a href="#contacto" className="text-blue-200 hover:text-white transition-colors flex items-center gap-2 group">
+              <svg className="w-4 h-4 text-red-600 group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+              Contacto
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      {/* Columna 3: Nuestras Bodegas */}
+      <div>
+        <h3 className="text-xl font-bold mb-4 text-white">Nuestras Bodegas</h3>
+        <div className="space-y-4">
+          <div>
+            <h4 className="font-semibold text-white mb-2 flex items-center gap-2">
+              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+              </svg>
+              Cerrillos
+            </h4>
+            <p className="text-blue-200 text-sm">Transversal 5455, 9230115</p>
+            <p className="text-blue-200 text-sm">Cerrillos, Santiago</p>
+          </div>
+          <div>
+            <h4 className="font-semibold text-white mb-2 flex items-center gap-2">
+              <svg className="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+              </svg>
+              San Joaquín
+            </h4>
+            <p className="text-blue-200 text-sm">Rivas 690</p>
+            <p className="text-blue-200 text-sm">San Joaquín, Santiago</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Columna 4: Contacto */}
+      <div>
+        <h3 className="text-xl font-bold mb-4 text-white">Contacto</h3>
+        <ul className="space-y-3">
+          <li className="flex items-start gap-3">
+            <svg className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+            </svg>
+            <div>
+              <p className="text-blue-200 text-sm">Teléfono</p>
+              <a href="tel:+56934850678" className="text-white hover:text-red-400 transition-colors">+56 9 3485 0678</a>
+            </div>
+          </li>
+          <li className="flex items-start gap-3">
+            <svg className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+            </svg>
+            <div>
+              <p className="text-blue-200 text-sm">Email</p>
+              <a href="mailto:contacto@reddebodegas.cl" className="text-white hover:text-red-400 transition-colors break-all">contacto@reddebodegas.cl</a>
+            </div>
+          </li>
+          <li className="flex items-start gap-3">
+            <svg className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+            </svg>
+            <div>
+              <p className="text-blue-200 text-sm">Horario</p>
+              <p className="text-white text-sm">Lun - Vie: 07:00 - 19:00</p>
+              <p className="text-white text-sm">Sáb: 08:00 - 17:00</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    {/* Línea divisoria */}
+    <div className="border-t border-white/10"></div>
+
+    {/* Footer inferior */}
+    <div className="py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p className="text-blue-200 text-sm text-center md:text-left">
+        Por <span className="text-white font-semibold">Samuel Llach</span> para <span className="text-white font-semibold">RED DE BODEGAS</span> - Copyright ©. 2025
+      </p>
+      <div className="flex gap-6 text-sm">
+        <a href="#" className="text-blue-200 hover:text-white transition-colors">Política de Privacidad</a>
+        <a href="#" className="text-blue-200 hover:text-white transition-colors">Términos y Condiciones</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
     </div>
   );
