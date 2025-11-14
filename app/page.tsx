@@ -4,6 +4,8 @@
 import { useState, useEffect, FormEvent } from 'react';
 import Image from 'next/image';
 import emailjs from '@emailjs/browser';
+import AOS from 'aos';
+import 'aos/dist/aos.css'
 
 export default function Home() {
   const [scrollDirection, setScrollDirection] = useState('up');
@@ -40,6 +42,16 @@ export default function Home() {
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
+
+  useEffect(() => {
+  AOS.init({
+    duration: 1000,
+    once: true,
+    easing: 'ease-out',
+  });
+}, []);
+
+
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -140,7 +152,7 @@ export default function Home() {
     </div>
 
     {/* Bodega 1: Cerrillos */}
-    <div className="mb-16 md:mb-24">
+    <div data-aos="fade-up" className="mb-16 md:mb-24">
       <div className="flex items-center justify-center gap-3 mb-8">
         <div className="h-px w-12 bg-gradient-to-r from-transparent to-blue-600"></div>
         <div className="bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg">
@@ -298,7 +310,7 @@ export default function Home() {
     </div>
 
     {/* Bodega 2: San Joaquín */}
-    <div className="mb-12">
+    <div data-aos="fade-up" className="mb-12">
       <div className="flex items-center justify-center gap-3 mb-8">
         <div className="h-px w-12 bg-gradient-to-r from-transparent to-red-600"></div>
         <div className="bg-red-600 text-white px-6 py-3 rounded-full shadow-lg">
@@ -456,7 +468,7 @@ export default function Home() {
     </div>
 
     {/* Estadísticas generales */}
-<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto mt-16">
+<div data-aos="fade-up" className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto mt-16">
   <div className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
     <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
       <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -520,7 +532,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
             
             {/* Lado izquierdo: Imagen con diseño moderno */}
-            <div className="relative order-2 lg:order-1">
+            <div data-aos="fade-right" className="relative order-2 lg:order-1">
               {/* Sombra roja decorativa */}
               <div className="absolute -bottom-8 -left-8 w-full h-full bg-red-600 rounded-2xl opacity-60"></div>
               
@@ -559,7 +571,7 @@ export default function Home() {
             </div>
 
             {/* Lado derecho: Contenido */}
-            <div className="text-left order-1 lg:order-2 space-y-6">
+            <div data-aos="fade-left" className="text-left order-1 lg:order-2 space-y-6">
               {/* Badge superior */}
               <div className="inline-flex items-center gap-2 bg-red-600/20 border border-red-500/30 text-red-300 px-4 py-2 rounded-full text-sm font-semibold">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -665,7 +677,7 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
           
           {/* Header de la sección */}
-          <div className="text-center mb-12 md:mb-16">
+          <div data-aos="fade-up" className="text-center mb-12 md:mb-16">
             <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -684,7 +696,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 max-w-5xl mx-auto">
             
             {/* Imagen 1 */}
-            <div className="relative group">
+            <div data-aos="fade-right" className="relative group">
               <div className="relative overflow-hidden rounded-2xl shadow-2xl h-64 md:h-80">
                 <Image 
                   src="/images/pantallas.png" 
@@ -702,7 +714,7 @@ export default function Home() {
             </div>
 
             {/* Imagen 2 */}
-            <div className="relative group">
+            <div  data-aos="fade-left" className="relative group">
               <div className="relative overflow-hidden rounded-2xl shadow-2xl h-64 md:h-80">
                 <Image 
                   src="/images/camaras.jpg" 
@@ -725,7 +737,7 @@ export default function Home() {
           <div className="space-y-6 max-w-5xl mx-auto">
             
             {/* Característica 1 */}
-            <div className="bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-2xl p-6 md:p-8 hover:shadow-xl transition-all duration-300">
+            <div data-aos="fade-right"  className="bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-2xl p-6 md:p-8 hover:shadow-xl transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="bg-blue-600 p-4 rounded-xl shadow-lg flex-shrink-0">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -748,7 +760,7 @@ export default function Home() {
             </div>
 
             {/* Característica 2 */}
-            <div className="bg-gradient-to-br from-red-50 to-white border border-red-100 rounded-2xl p-6 md:p-8 hover:shadow-xl transition-all duration-300">
+            <div data-aos="fade-left" className="bg-gradient-to-br from-red-50 to-white border border-red-100 rounded-2xl p-6 md:p-8 hover:shadow-xl transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="bg-red-600 p-4 rounded-xl shadow-lg flex-shrink-0">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -770,7 +782,7 @@ export default function Home() {
             </div>
 
             {/* Característica 3 */}
-            <div className="bg-gradient-to-br from-green-50 to-white border border-green-100 rounded-2xl p-6 md:p-8 hover:shadow-xl transition-all duration-300">
+            <div data-aos="fade-right" className="bg-gradient-to-br from-green-50 to-white border border-green-100 rounded-2xl p-6 md:p-8 hover:shadow-xl transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="bg-green-600 p-4 rounded-xl shadow-lg flex-shrink-0">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -799,7 +811,7 @@ export default function Home() {
           </div>
 
           {/* Título de ubicaciones */}
-          <div id="sucursales"className="text-center mb-10">
+          <div data-aos="fade-up" id="sucursales"className="text-center mb-10">
             <h3 className="text-2xl md:text-3xl font-bold text-blue-900 mb-2">Nuestras Ubicaciones</h3>
             <p className="text-gray-600">Visítanos en cualquiera de nuestras dos bodegas</p>
           </div>
@@ -808,7 +820,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             
             {/* Mapa 1: Cerrillos */}
-            <div id="cerrillos" className="relative group">
+            <div data-aos="fade-right" id="cerrillos" className="relative group">
               {/* Efecto de sombra y borde */}
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-red-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
               
@@ -835,7 +847,7 @@ export default function Home() {
             </div>
 
             {/* Mapa 2: San Joaquín */}
-            <div id="san-joaquin" className="relative group">
+            <div data-aos="fade-left" id="san-joaquin" className="relative group">
               {/* Efecto de sombra y borde */}
               <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
               
@@ -866,12 +878,12 @@ export default function Home() {
 
       {/* Sección de Servicios - Responsive */}
       <section id="servicios" className="bg-white py-8 md:py-16">
-        <div className="container mx-auto px-4">
+        <div  data-aos="fade-up" className="container mx-auto px-4">
           <h2 className="text-center text-4xl sm:text-5xl md:text-6xl font-bold text-blue-900 italic mb-8 md:mb-16">
             SERVICIOS
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          <div data-aos="fade-up" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
             
             {/* Servicio 1 */}
             <div className="text-left">
@@ -1001,7 +1013,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             
             {/* Panel Izquierdo - Información (Rojo) */}
-            <div className="bg-gradient-to-br from-red-700 via-red-600 to-red-800 rounded-3xl p-8 md:p-10 shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
+            <div data-aos="fade-right" className="bg-gradient-to-br from-red-700 via-red-600 to-red-800 rounded-3xl p-8 md:p-10 shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
               {/* Encabezado */}
               <div className="mb-8">
                 <p className="text-red-200 text-sm uppercase tracking-wider mb-3 font-semibold">
@@ -1094,7 +1106,7 @@ export default function Home() {
             </div>
 
             {/* Panel Derecho - Formulario (Azul) */}
-            <div className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 rounded-3xl p-8 md:p-10 shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
+            <div data-aos="fade-left" className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 rounded-3xl p-8 md:p-10 shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
               <div className="mb-8">
                 <h2 className="text-3xl md:text-4xl font-bold text-white uppercase italic mb-3">
                   FORMULARIO DE CONTACTO
